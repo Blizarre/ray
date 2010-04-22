@@ -1,5 +1,5 @@
 #include "Elements.hpp"
-#include<vector>
+#include <vector>
 
 using namespace std;
 
@@ -7,5 +7,6 @@ class World {
     private:
         vector<Element> vElements;
 
-    public
-}
+    public:
+};
+

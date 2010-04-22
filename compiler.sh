@@ -9,8 +9,8 @@ function fail {
 }
 
 echo "Demarrage de la compilation"
-g++ $CFLAGS -c test.c -o test.o -c -I /usr/include/SDL/ || fail
-g++ $CFLAGS -c simpleSDL.c -o simpleSDL.o -I /usr/include/SDL/ || fail
-g++ $CFLAGS -lSDL   simpleSDL.o test.o -o prog || fail
+g++ $CFLAGS -c test.cpp -o test.o -c -I /usr/include/SDL/ || fail
+g++ $CFLAGS -c simpleSDL.cpp -o simpleSDL.o -I /usr/include/SDL/ || fail
+g++ $CFLAGS -lSDL   simpleSDL.o test.o -o test || fail
 
 echo "Terminé"
