@@ -33,13 +33,12 @@ Vecteur3f definirDirection(int x, int y) {
 }
 
 
-Uint8 rayTracing(Vecteur3f origine, Vecteur3f direction,VectorE &monde) {
+Uint8 rayTracing(const Vecteur3f &origine, const Vecteur3f &direction, const VectorE &monde) {
     Elementf* resultat = NULL;
     flottant distanceMin = numeric_limits<flottant>::max();
     flottant tmp;
-    VectorE::iterator it;
 
-    for( it=monde.begin(); it != monde.end(); ++it) {
+    for(VectorE::const_iterator it=monde.begin(); it != monde.end(); ++it) {
         if ((*it)->isIntersection(origine, direction)) {
             if( (tmp=(*it)->distanceIntersection()) < distanceMin) {
                 resultat = (*it);

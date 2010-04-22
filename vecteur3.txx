@@ -17,19 +17,19 @@ template <class T> T&  Vecteur3<T>::operator[] (unsigned int i) {
     return this->val[i];
 }
 
-template <class T> T Vecteur3<T>::X() {
+template <class T> T Vecteur3<T>::X() const {
     return this->val[0];
 }
 
-template <class T> T Vecteur3<T>::Y() {
+template <class T> T Vecteur3<T>::Y() const {
     return this->val[1];
-}
+} 
 
-template <class T> T Vecteur3<T>::Z() {
+template <class T> T Vecteur3<T>::Z() const {
     return this->val[2];
 }
 
-template <class T> T Vecteur3<T>::norme() {
+template <class T> T Vecteur3<T>::norme() const {
     return sqrt(this->val[0] * this->val[0] + this->val[1] * this->val[1] + this->val[2] * this->val[2]);
 }
 
@@ -50,18 +50,22 @@ template <class T> void Vecteur3<T>::normer(T val) {
     this->val[2] *= facteur;
 }
 
-template <class T> T Vecteur3<T>::operator*(Vecteur3<T> op) {
+template <class T> T Vecteur3<T>::operator*(const Vecteur3<T> &op) const {
     return this->val[0] * op.val[0] + this->val[1] * op.val[1] + this->val[2] * op.val[2];
 }
 
-template <class T> Vecteur3<T> Vecteur3<T>::operator*(T op) {
+template <class T> Vecteur3<T> Vecteur3<T>::operator*(T op) const {
     return Vecteur3<T>(this->val[0] * op, this->val[1] * op, this->val[2] * op);
 }
 
-template <class T> Vecteur3<T> Vecteur3<T>::operator+(Vecteur3<T> op) {
+template <class T> Vecteur3<T> Vecteur3<T>::operator+(const Vecteur3<T> &op) const {
     return Vecteur3<T>(this->val[0] + op.val[0], this->val[1] + op.val[1], this->val[2] + op.val[2]);
 }
 
-template <class T> Vecteur3<T> Vecteur3<T>::operator-(Vecteur3<T> op) {
+template <class T> Vecteur3<T> Vecteur3<T>::operator-(const Vecteur3<T> &op) const {
     return Vecteur3<T>(this->val[0] - op.val[0], this->val[1] - op.val[1], this->val[2] - op.val[2]);
+}
+
+template <class T> std::ostream &operator<<(std::ostream &s, const Vecteur3<T> &t) {
+    return s << t.X() << " " << t.Y() <<" " << t.Z();
 }
