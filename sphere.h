@@ -11,26 +11,26 @@
 #define my_sign(a) ((a)<0?(-1):(+1))
 
 
-template <class T> class Sphere: public Element<T> {
+class Sphere: public Element {
     private:
-        Vecteur3<T> position;
-        Vecteur3<T> positionLastIntersection;
-        Vecteur3<T> lightRay;
-        T diametre;
-        T distance;
-        T r2; // Rayon * Rayon
+        Vecteur3f position;
+        Vecteur3f positionLastIntersection;
+        Vecteur3f lightRay;
+        float diametre;
+        float distance;
+        float r2; // Rayon * Rayon
             
     public:
-        Sphere(Vecteur3<T> pos, T diam):position(pos), diametre(diam) {
+        Sphere(Vecteur3f pos, float diam):position(pos), diametre(diam) {
             this->r2 = (this->diametre / 2) * (this->diametre / 2);
-            this->lightRay = Vecteur3<T>(-5,5,-3);
+            this->lightRay = Vecteur3f(-5,5,-5);
             this->lightRay.normer();
         }
 
-        bool isIntersection(Vecteur3<T> origineRayon, Vecteur3<T> directionRayon) {
-            Vecteur3<T> L;
-            T t_ca, t_hc; 
-            T d2;
+        bool isIntersection(Vecteur3f origineRayon, Vecteur3f directionRayon) {
+            Vecteur3f L;
+            float t_ca, t_hc; 
+            float d2;
             
             L = this->position - origineRayon;
             t_ca = L * directionRayon;
@@ -61,16 +61,27 @@ template <class T> class Sphere: public Element<T> {
             */
         }
     
-        T distanceIntersection() {
+        float distanceIntersection() {
             return this->distance;
         }
 
+        void deplacer(Vecteur3f dx) {
+            this->position = this->position +  dx;
+        }
 
-        T luminosite(std::vector<Element<T> * > monde) {
-            Vecteur3<T> N = (this->positionLastIntersection - this->position);
+
+        float luminosite(std::vector<Element * > monde) {
+            Vecteur3f N = (this->positionLastIntersection - this->position);
             N.normer();
-            T res = this->lightRay * N;
-            return my_max(res*255,0);
+            float res = this->lightRay * N;
+            std::vector<Element* >::const_iterator it;
+            for( it = monde.begin(); it != monde.end(); ++it) {
+               if((*it) != this && (*it)->isIntersection(this->positionLastIntersection, N) ) {
+                   if( (*it)->distanceIntersection() > 0)
+                       res = (res + (*it)->luminosite(monde)) / 2;
+               }
+            }
+            return my_max(res, 0);
         }
                   
 };

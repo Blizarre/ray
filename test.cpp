@@ -18,8 +18,7 @@ using namespace std;
 
 typedef float flottant;
 typedef Vecteur3<flottant> Vecteur3f;
-typedef Element<flottant> Elementf;
-typedef std::vector< Elementf* > VectorE;
+typedef std::vector< Element* > VectorE;
 
 
 flottant tanx, tany;
@@ -34,7 +33,7 @@ Vecteur3f definirDirection(int x, int y) {
 
 
 Uint8 rayTracing(const Vecteur3f &origine, const Vecteur3f &direction, const VectorE &monde) {
-    Elementf* resultat = NULL;
+    Element* resultat = NULL;
     flottant distanceMin = numeric_limits<flottant>::max();
     flottant tmp;
 
@@ -46,8 +45,9 @@ Uint8 rayTracing(const Vecteur3f &origine, const Vecteur3f &direction, const Vec
             }
         }
     }
-    if(resultat)
-        return resultat->luminosite(monde);
+    if(resultat) {
+        return 250*resultat->luminosite(monde);
+    }
     else
         return 255;
 }
@@ -67,9 +67,10 @@ int main() {
     Vecteur3f camera(1,1,1);
     Vecteur3f direction;
     VectorE monde;
-    monde.push_back( new Sphere<flottant>(Vecteur3f(2,0,25), 10));
-    monde.push_back( new Sphere<flottant>(Vecteur3f(0,2,4), 0.5));
-    monde.push_back( new Sphere<flottant>(Vecteur3f(-1,-1.5,5.5), 2));
+    Sphere* mov = new Sphere(Vecteur3f(3,3,10), 5);
+    monde.push_back( mov );
+    monde.push_back( new Sphere(Vecteur3f(-3,3,10), 5));
+    monde.push_back( new Sphere(Vecteur3f(-3,-3,10), 4));
 
     tanx = tan((flottant)M_PI/4.0);
     tany = tan( (HAUTEUR / (flottant)LARGEUR) * M_PI/4.0);
@@ -90,6 +91,7 @@ int main() {
             }
         }
         t1=SDL_GetTicks();
+        mov->deplacer( Vecteur3f(0,0,0.1 * (1 - 2* (((int)(t1/2000.0))%2)) ) );
         for(x=0;x<LARGEUR;x++)
             for(y=0;y<HAUTEUR;y++) {
                 direction = definirDirection(x, y);
