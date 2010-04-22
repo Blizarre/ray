@@ -2,4 +2,5 @@
 callgrind.*
 prog
 test
+testVector
 .*.swp
