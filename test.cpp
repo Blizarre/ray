@@ -92,6 +92,7 @@ int main() {
         }
         t1=SDL_GetTicks();
         mov->deplacer( Vecteur3f(0,0,0.1 * (1 - 2* (((int)(t1/2000.0))%2)) ) );
+        //#pragma omp parallel
         for(x=0;x<LARGEUR;x++)
             for(y=0;y<HAUTEUR;y++) {
                 direction = definirDirection(x, y);

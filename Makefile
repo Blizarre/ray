@@ -1,6 +1,6 @@
 CC=$(CXX)
-CXXFLAGS=-O3 -g `pkg-config --cflags sdl`
-LDFLAGS=-O333g `pkg-config --libs sdl`
+CXXFLAGS=-O3 -g `pkg-config --cflags sdl` -fopenmp -Wall
+LDFLAGS=-O3 -g `pkg-config --libs sdl ` -fopenmp -Wall
 BINS=test
 
 all: $(BINS)

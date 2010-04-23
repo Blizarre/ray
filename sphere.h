@@ -16,6 +16,7 @@ class Sphere: public Element {
         Vecteur3f position;
         Vecteur3f positionLastIntersection;
         Vecteur3f lightRay;
+        Vecteur3f vecteurIncident;
         float diametre;
         float distance;
         float r2; // Rayon * Rayon
@@ -40,6 +41,7 @@ class Sphere: public Element {
             t_hc = std::sqrt(this->r2 - d2);
             this->distance = my_min(t_ca - t_hc, t_ca + t_hc);
             this->positionLastIntersection = origineRayon + directionRayon * this->distance;
+            this->vecteurIncident = directionRayon;
             return this->distance > 0;
 
             // directionRayon doit être normé.. A=1 dans ce cas donc il est ignoré....
@@ -76,7 +78,7 @@ class Sphere: public Element {
             float res = this->lightRay * N;
             std::vector<Element* >::const_iterator it;
             for( it = monde.begin(); it != monde.end(); ++it) {
-               if((*it) != this && (*it)->isIntersection(this->positionLastIntersection, N) ) {
+               if((*it) != this && (*it)->isIntersection(this->positionLastIntersection, N - this->vecteurIncident) ) {
                    if( (*it)->distanceIntersection() > 0)
                        res = (res + (*it)->luminosite(monde)) / 2;
                }
