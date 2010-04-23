@@ -62,6 +62,12 @@ template <class T> Vecteur3<T> Vecteur3<T>::operator+(const Vecteur3<T> &op) con
     return Vecteur3<T>(this->val[0] + op.val[0], this->val[1] + op.val[1], this->val[2] + op.val[2]);
 }
 
+template <class T> 
+Vecteur3<T> &Vecteur3<T>::operator+=(const Vecteur3<T> &v) {
+    for (int i=0; i<3; i++) { this->val[i] += v.val[i]; }
+    return *this;
+}
+
 template <class T> Vecteur3<T> Vecteur3<T>::operator-(const Vecteur3<T> &op) const {
     return Vecteur3<T>(this->val[0] - op.val[0], this->val[1] - op.val[1], this->val[2] - op.val[2]);
 }

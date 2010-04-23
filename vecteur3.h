@@ -21,6 +21,7 @@ public:
     T operator*(const Vecteur3<T> &) const;
     Vecteur3<T> operator*(T op) const;
     Vecteur3<T> operator+(const Vecteur3<T> &) const;
+    Vecteur3<T> &operator+=(const Vecteur3<T> &);
     Vecteur3<T> operator-(const Vecteur3<T> &) const;
 
 private:
