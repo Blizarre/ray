@@ -10,6 +10,7 @@
 #define my_min(a,b) ((a)>(b)?(b):(a))
 #define my_sign(a) ((a)<0?(-1):(+1))
 
+int profondeur;
 
 class Sphere: public Element {
     private:
@@ -76,12 +77,16 @@ class Sphere: public Element {
             Vecteur3f N = (this->positionLastIntersection - this->position);
             N.normer();
             float res = this->lightRay * N;
+            if(profondeur < 3) {
             std::vector<Element* >::const_iterator it;
             for( it = monde.begin(); it != monde.end(); ++it) {
                if((*it) != this && (*it)->isIntersection(this->positionLastIntersection, N - this->vecteurIncident) ) {
                    if( (*it)->distanceIntersection() > 0)
+                       profondeur ++;
                        res = (res + (*it)->luminosite(monde)) / 2;
+                       profondeur --;
                }
+            }
             }
             return my_max(res, 0);
         }

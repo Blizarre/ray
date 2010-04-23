@@ -6,7 +6,7 @@ using namespace std;
 
 
 
-SDL_Surface* InitVideo() {
+SDL_Surface* InitVideo(int largeur, int hauteur) {
   Uint32 flags = SDL_DOUBLEBUF;
   SDL_Surface *screen;
 
@@ -17,10 +17,14 @@ SDL_Surface* InitVideo() {
 
   atexit(SDL_Quit); // Clean it up nicely :)
  
-  screen = SDL_SetVideoMode(LARGEUR, HAUTEUR, 32, flags);
+  screen = SDL_SetVideoMode(largeur, hauteur, 32, flags);
   if (screen == NULL) {
     cerr <<"Unable to set video mode: " <<SDL_GetError() <<endl;
   }
+
+  SDL_ShowCursor(SDL_DISABLE);
+  SDL_WM_GrabInput(SDL_GRAB_ON);
+
   return screen;
 }
 
