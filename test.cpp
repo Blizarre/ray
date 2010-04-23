@@ -13,6 +13,11 @@
 #define SCREEN_INIT_ERROR (5)
 #define RETURN_OK (0)
 
+
+
+#define LARGEUR (512)
+#define HAUTEUR (384)
+
 using namespace std;
 
 
@@ -54,9 +59,7 @@ Uint8 rayTracing(const Vecteur3f &origine, const Vecteur3f &direction, const Vec
 
 int main() {
     SDL_Surface *screen; //This pointer will reference the backbuffer 
-    screen = InitVideo();
-    SDL_ShowCursor(SDL_DISABLE);
-    SDL_WM_GrabInput(SDL_GRAB_ON);
+    screen = InitVideo(LARGEUR, HAUTEUR);
     
     if(screen == NULL)
         exit(SCREEN_INIT_ERROR);
