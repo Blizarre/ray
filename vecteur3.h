@@ -2,14 +2,10 @@
 #include<ostream>
 
 #ifndef __MY_VECTOR__0ff0 
-
 #define __MY_VECTOR__0ff0
 
-template<class T> class Vecteur3 {
-
-private:
-    T val[3];
-
+template<class T>
+class Vecteur3 {
 public:
     Vecteur3(T x, T y, T z);
     Vecteur3(T* v);
@@ -27,11 +23,14 @@ public:
     Vecteur3<T> operator+(const Vecteur3<T> &) const;
     Vecteur3<T> operator-(const Vecteur3<T> &) const;
 
+private:
+    T val[3];
+
 };
 
 template <class T>
 std::ostream& operator<<(std::ostream& s, const Vecteur3<T> &t);
 
-#include"vecteur3.txx"
+#include "vecteur3.txx"
 
 #endif
