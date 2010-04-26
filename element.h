@@ -15,6 +15,7 @@ struct Rayon {
     const Vecteur &direction;
     Vecteur intersection;
     float distance;
+    int depth;
 };
 
 struct World;
@@ -26,7 +27,7 @@ struct Element {
 
 struct World {
     typedef std::list<Element*> Elements;
-    float rayTracing(Rayon &rayon, const Element *from, int depth) const;
+    float rayTracing(Rayon &rayon, const Element *from) const;
 
     ~World();
 

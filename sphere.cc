@@ -1,5 +1,6 @@
 #include "sphere.h"
 
+#include <cstdlib>
 #define my_max(a,b) ((a)<(b)?(b):(a))
 #define my_min(a,b) ((a)>(b)?(b):(a))
 #define my_sign(a) ((a)<0?(-1):(+1))
@@ -31,19 +32,8 @@ float Sphere::luminosite(const Rayon &rayon, const World &world) const {
     Vecteur N = rayon.intersection - this->position;
     N.normer();
 
-    return 1;
     float res = this->light * N;
-    //std::vector<Element* >::const_iterator it;
-    //for( it = monde.begin(); it != monde.end(); ++it) {
-    //   if((*it) != this && (*it)->isIntersection(this->positionLastIntersection, N - this->vecteurIncident) ) {
-    //       if( (*it)->distanceIntersection() > 0)
-    //           profondeur ++;
-    //           res = (res + (*it)->luminosite(monde)) / 2;
-    //           profondeur --;
-    //   }
-    //}
-    //}
-    return my_max(res, 0);
+    return my_max(.2+.8*res,0.);
 }
 
 /*

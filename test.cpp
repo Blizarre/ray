@@ -1,6 +1,7 @@
 #include "simpleSDL.h"
 #include "element.h"
 #include "sphere.h"
+#include "plane.h"
 
 static const int SCREEN_INIT_ERROR = 5;
 static const int RETURN_OK = 0;
@@ -9,12 +10,12 @@ static const int LARGEUR = 512;
 static const int HAUTEUR = 384;
 
 static const float tanx = tanf(M_PI/4.0);
-static const float tany = tanf( (HAUTEUR / LARGEUR) * M_PI/4.0);
+static const float tany = tanf( static_cast<float>(HAUTEUR)/static_cast<float>(LARGEUR) * M_PI/4.0);
     
 Vecteur definirDirection(Vecteur &direction, float x, float y) {
-    direction[0] = tanx * ( 2*x - LARGEUR ) / (LARGEUR);
-    direction[1] = tany * ( 2*y - HAUTEUR ) / (HAUTEUR);
-    direction[2] = 1;
+    direction[0] = tanx * ( 2.*x - LARGEUR ) / (LARGEUR);
+    direction[1] = tany * ( 2.*y - HAUTEUR ) / (HAUTEUR);
+    direction[2] = 1.;
     direction.normer();
     return direction;
 }
@@ -24,7 +25,7 @@ int main() {
     screen = InitVideo(LARGEUR, HAUTEUR);
     if(screen == NULL) exit(SCREEN_INIT_ERROR);
 
-    Vecteur camera_pos(1,1,1);
+    Vecteur camera_pos(0,0,-3);
     Vecteur camera_dir(0,0,1);
     Rayon camera_ray(camera_pos,camera_dir);
     World monde;
@@ -32,6 +33,7 @@ int main() {
     Sphere* mov = new Sphere(Vecteur(3,3,10), 5); monde.elements.push_back( mov );
     monde.elements.push_back( new Sphere(Vecteur(-3,3,10), 5));
     monde.elements.push_back( new Sphere(Vecteur(-3,-3,10), 4));
+    monde.elements.push_back( new Plane() );
 
     while (1) { 
         
