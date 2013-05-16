@@ -8,3 +8,5 @@ It is a simple software I made to learn more about ray tracing.
 
 The scene consist of 4 sphere, rendered in ray-tracing, 2 are moving and you can control one using your mouse. Lots of reflection (each shpere reflect the light) .
 It was pretty nice.
+
+Use SDL to get a drawing buffer and receive keystrokes, C++ (from when I didn't exactly knew what I was doing, so beware)
