@@ -16,7 +16,7 @@ float World::rayTracing(Rayon &rayon, const Element *from) const {
 
     for (Elements::const_iterator it=elements.begin(); it!=elements.end(); it++) {
         const Element *elem = *it;
-        if (elem != from and elem->isIntersection(rayon) and rayon.distance < rayonMin.distance) {
+        if (elem != from && elem->isIntersection(rayon) && rayon.distance < rayonMin.distance) {
             rayonMin.update(rayon);
             elementMin = elem;
         }

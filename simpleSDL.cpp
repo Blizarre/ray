@@ -7,7 +7,7 @@ using namespace std;
 
 
 SDL_Surface* InitVideo(int largeur, int hauteur) {
-  Uint32 flags = SDL_DOUBLEBUF;
+	Uint32 flags = 0; //SDL_DOUBLEBUF;
   SDL_Surface *screen;
 
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -17,7 +17,7 @@ SDL_Surface* InitVideo(int largeur, int hauteur) {
 
   atexit(SDL_Quit); // Clean it up nicely :)
  
-  screen = SDL_SetVideoMode(largeur, hauteur, 32, flags);
+  screen = SDL_CreateWindow("RtRealTracing", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, largeur, hauteur, flags); //SDL_SetVideoMode(largeur, hauteur, 32, flags);
   if (screen == NULL) {
     cerr <<"Unable to set video mode: " <<SDL_GetError() <<endl;
   }
