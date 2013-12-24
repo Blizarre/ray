@@ -1,37 +1,19 @@
 #ifndef __ELEMENT_0ff0
 #define __ELEMENT_0ff0
 
-#include"vecteur3.h"
-#include <list>
-#include <vector>
+#include "light.h"
+#include "Rayon.h"
+#include "World.h"
 
-typedef Vecteur3<float> Vecteur;
+// Why should I need to declare World, since the header world?h is alreay included ?
+// Maybe because there's a reference to World in the the definition of Element and vice versa
+class World;
 
-struct Rayon {
-    Rayon(const Vecteur &origine, const Vecteur &direction);
-    void update(const Rayon &rayon);
-
-    const Vecteur &origine;
-    const Vecteur &direction;
-    Vecteur intersection;
-    float distance;
-    int depth;
+class Element {
+public:
+    virtual float isIntersection(const Rayon & rayon) =0;
+    virtual Light luminosite(const Rayon &, const World &) const =0;
 };
 
-struct World;
-
-struct Element {
-    virtual bool  isIntersection(Rayon &rayon) const =0;
-    virtual float luminosite(const Rayon &rayon, const World &world) const =0;
-};
-
-struct World {
-    typedef std::list<Element*> Elements;
-    float rayTracing(Rayon &rayon, const Element *from) const;
-
-    ~World();
-
-    Elements elements;
-};
 
 #endif

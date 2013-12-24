@@ -1,7 +1,9 @@
 #include "SDL.h" 
 
+void freeRenderer(Uint32 *myPixels);
+void showImage(Uint32 *myPixels);
 
-SDL_Surface* InitVideo(int, int);
+Uint32* InitVideo(int, int);
 
-void definirPixel(SDL_Surface *surface, int x, int y, Uint8 pixel);
+void definirPixel(Uint32 *surface, int x, int y, Uint8 pixel);
 

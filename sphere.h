@@ -2,19 +2,23 @@
 #define __SPHERE_0ff1
 
 #include "element.h"
+#include "world.h"
+#include "vecteur3.h"
+#include "Rayon.h"
 
 class Sphere: public Element {
 public:
-    Sphere(const Vecteur &pos, float diam);
+    Sphere(const Position &pos, float diam);
 
-    bool  isIntersection(Rayon &rayon) const;
-    float luminosite(const Rayon &rayon,const World &world) const;
+    virtual float isIntersection(const Rayon & rayon);
+    virtual Light luminosite(const Rayon & rayon,const World & world) const;
 
-    void  deplacer(const Vecteur &d);
+    void  deplacer(const Direction &d);
 
 private:
-    Vecteur position;
-    Vecteur light;
+	mutable Rayon lastRay;
+    Position position;
+    Position light;
     float radius2; // Rayon * Rayon
 };
 

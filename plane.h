@@ -2,13 +2,16 @@
 #define __PLANE_H__
 
 #include "element.h"
-
+#include "World.h"
 class Plane: public Element {
 public:
     Plane();
 
-    bool  isIntersection(Rayon &rayon) const;
-    float luminosite(const Rayon &rayon,const World &world) const;
+    virtual float isIntersection(const Rayon &rayon);
+    virtual Light luminosite(const Rayon &rayon,const World &world) const;
+
+protected:
+	Rayon lastIntersection;
 };
 
 #endif

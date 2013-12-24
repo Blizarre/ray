@@ -1,39 +1,40 @@
 #include "sphere.h"
 
 #include <cstdlib>
-#define my_max(a,b) ((a)<(b)?(b):(a))
-#define my_min(a,b) ((a)>(b)?(b):(a))
-#define my_sign(a) ((a)<0?(-1):(+1))
+#include <algorithm>
 
-Sphere::Sphere(const Vecteur &pos, float diam) : position(pos), light(-5,5,-5), radius2((diam/2)*(diam/2)) {
+
+Sphere::Sphere(const Position &pos, float diam) : position(pos), light(-5,5,-5), radius2((diam/2)*(diam/2)) {
     light.normer();
 }
 
-void Sphere::deplacer(const Vecteur &dx) {
+void Sphere::deplacer(const Direction &dx) {
     this->position += dx;
 }
 
-bool  Sphere::isIntersection(Rayon &rayon) const {
+float Sphere::isIntersection(const Rayon & rayon) {
     
-    Vecteur L = this->position - rayon.origine;
+    Position L = this->position - rayon.origine;
     float t_ca = L * rayon.direction;
     if (t_ca < 0) return false;
 
     float d2 = L * L - t_ca * t_ca;
-    if (d2 > this->radius2) return false;
+    
+	if (d2 > this->radius2)
+		return -1.0f;
 
     float t_hc = sqrtf(this->radius2 - d2);
-    rayon.distance = my_min(t_ca - t_hc, t_ca + t_hc);
-    rayon.intersection = rayon.origine + rayon.direction * rayon.distance;
-    return rayon.distance > 0;
+	this->lastRay.distance = std::min(t_ca - t_hc, t_ca + t_hc);
+	this->lastRay.intersection = rayon.origine + rayon.direction * rayon.distance;
+	return this->lastRay.distance;
 }
 
-float Sphere::luminosite(const Rayon &rayon, const World &world) const {
-    Vecteur N = rayon.intersection - this->position;
+Light Sphere::luminosite(const Rayon &rayon, const World &world) const {
+    Position N = rayon.intersection - this->position;
     N.normer();
 
-    float res = this->light * N;
-    return my_max(.2+.8*res,0.);
+    float res = world.globalLight.direction * N;
+    return std::max(.2f+.8f*res,0.f);
 }
 
 /*

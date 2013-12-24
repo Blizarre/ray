@@ -4,6 +4,7 @@
 #ifndef __MY_VECTOR__0ff0 
 #define __MY_VECTOR__0ff0
 
+
 template<class T>
 class Vecteur3 {
 public:
@@ -26,12 +27,14 @@ public:
 
 private:
     T val[3];
-
 };
 
 template <class T>
 std::ostream& operator<<(std::ostream& s, const Vecteur3<T> &t);
 
 #include "vecteur3.txx"
+
+typedef Vecteur3<float> Direction;
+typedef Vecteur3<float> Position;
 
 #endif
