@@ -25,16 +25,16 @@ float Sphere::isIntersection(const Rayon & rayon) {
 
     float t_hc = sqrtf(this->radius2 - d2);
 	this->lastRay.distance = std::min(t_ca - t_hc, t_ca + t_hc);
-	this->lastRay.intersection = rayon.origine + rayon.direction * rayon.distance;
+	this->lastRay.intersection = rayon.origine + rayon.direction * lastRay.distance;
 	return this->lastRay.distance;
 }
 
 Light Sphere::luminosite(const Rayon &rayon, const World &world) const {
-    Position N = rayon.intersection - this->position;
+    Position N = lastRay.intersection - this->position;
     N.normer();
 
     float res = world.globalLight.direction * N;
-    return std::max(.2f+.8f*res,0.f);
+    return std::max( (world.background + .8f*res).light,0.f);
 }
 
 /*

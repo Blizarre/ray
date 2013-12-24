@@ -18,7 +18,7 @@ public:
 	World(LightSource globalLight, Light background): globalLight(globalLight), background(background) {}
 	World() {
 		globalLight.c = { 0.f, 1.0f, 0.f };
-		globalLight.direction = { 0.5f, 0.5f, 0.5f };
+		globalLight.direction = { 0.5f, -0.5f, -0.5f };
 		background = 0.1f;
 	}
 
