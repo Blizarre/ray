@@ -2,7 +2,8 @@
 #include "element.h"
 #include "sphere.h"
 #include "plane.h"
-
+#include "Material.h"
+#include <algorithm>
 static const int SCREEN_INIT_ERROR = 5;
 static const int RETURN_OK = 0;
 
@@ -20,8 +21,12 @@ Direction definirDirection(Direction &direction, float x, float y) {
 	return direction;
 }
 
-Uint8 lightToPixelValue(Light l) {
-	return static_cast<Uint8>(l.light * 255.0f);
+Pixel lightToPixel(Light l) {
+	Pixel p;
+	p.R = static_cast<Uint8>( std::min(255.f, l.light * l.col.Red   * 255.0f)  );
+	p.G = static_cast<Uint8>( std::min(255.f, l.light * l.col.Green * 255.0f) );
+	p.B = static_cast<Uint8>( std::min(255.f, l.light * l.col.Blue  * 255.0f) );
+	return p;
 }
 
 // Need to be extern "C" for SDL
@@ -36,9 +41,10 @@ int main(int argc, char *argv[]) {
 	Rayon camera_ray(Position(0,0,-3), Direction(0,0,1));
 	World monde;
 
-	Sphere* mov = new Sphere(Position(3, 3, 10), 5); monde.elements.push_back(mov);
-	monde.elements.push_back(new Sphere(Position(-3, 3, 10), 5));
-	monde.elements.push_back(new Sphere(Position(-3, -3, 10), 4));
+	Sphere* mov = new Sphere(Position(3, 3, 10), 5, Material::glass()); 
+	monde.elements.push_back(mov);
+	monde.elements.push_back(new Sphere(Position(-3, 3, 10), 5, Material::RedPlastic() ));
+	monde.elements.push_back(new Sphere(Position(-3, -3, 10), 4, Material::silver()    ));
 	monde.elements.push_back(new Plane());
 
 	while (1) {
@@ -46,8 +52,11 @@ int main(int argc, char *argv[]) {
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_MOUSEMOTION) {
-				camera_ray.origine[0] += 0.01f * (event.motion.xrel);
-				camera_ray.origine[1] += 0.01f * (event.motion.yrel);
+				monde.globalLight.direction[0] += 0.01f * (event.motion.xrel);
+				monde.globalLight.direction[1] += 0.01f * (event.motion.yrel);
+				//camera_ray.origine[0] += 0.01f
+				//	* (event.motion.xrel);
+				//camera_ray.origine[1] += 0.01f * (event.motion.yrel);
 			}
 			if (event.type == SDL_KEYDOWN) {
 				exit(RETURN_OK);
@@ -64,7 +73,7 @@ int main(int argc, char *argv[]) {
 		for (int x = 0; x < LARGEUR; x++) for (int y = 0; y < HAUTEUR; y++) {
 			definirDirection(camera_ray.direction, static_cast<float>(x), static_cast<float>(y));
 			Light value = monde.rayTracing(camera_ray, NULL);
-			definirPixel(screen, x, y, lightToPixelValue(value));
+			definirPixel(screen, x, y, lightToPixel(value));
 		}
 
 		showImage(screen);

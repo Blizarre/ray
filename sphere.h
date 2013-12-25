@@ -5,10 +5,11 @@
 #include "world.h"
 #include "vecteur3.h"
 #include "Rayon.h"
+#include "Material.h"
 
 class Sphere: public Element {
 public:
-    Sphere(const Position &pos, float diam);
+    Sphere(const Position &pos, float diam, Material mat);
 
     virtual float isIntersection(const Rayon & rayon);
     virtual Light luminosite(const Rayon & rayon,const World & world) const;
@@ -20,6 +21,7 @@ private:
     Position position;
     Position light;
     float radius2; // Rayon * Rayon
+	Material mat;
 };
 
 

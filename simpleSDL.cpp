@@ -52,19 +52,7 @@ Uint32* InitVideo(int l, int h) {
 	return data;
 }
 
-class Pixel {
-public:
-	Uint8 R;
-	Uint8 G;
-	Uint8 B;
-	Uint8 A;
-};
-
-void definirPixel(Uint32 *surface, int x, int y, Uint8 pixel) {
-	Uint32 *p1 = surface + y * largeur + x;
-	Pixel* p = (Pixel*)(p1);
-	p->R = pixel;
-	p->G = pixel;
-	p->B = pixel;
-	p->A = 0xff;
+void definirPixel(Uint32 *surface, int x, int y, Pixel p) {
+	Uint32 *uintVal = surface + y * largeur + x;
+	memcpy(uintVal, &p, sizeof(Uint32));
 }

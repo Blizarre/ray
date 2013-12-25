@@ -4,7 +4,7 @@
 #include <algorithm>
 
 
-Sphere::Sphere(const Position &pos, float diam) : position(pos), light(-5,5,-5), radius2((diam/2)*(diam/2)) {
+Sphere::Sphere(const Position &pos, float diam, Material mat) : position(pos), light(-5,5,-5), radius2((diam/2)*(diam/2)), mat(mat) {
     light.normer();
 }
 
@@ -13,7 +13,6 @@ void Sphere::deplacer(const Direction &dx) {
 }
 
 float Sphere::isIntersection(const Rayon & rayon) {
-    
     Position L = this->position - rayon.origine;
     float t_ca = L * rayon.direction;
     if (t_ca < 0) return false;
@@ -34,7 +33,12 @@ Light Sphere::luminosite(const Rayon &rayon, const World &world) const {
     N.normer();
 
     float res = world.globalLight.direction * N;
-    return std::max( (world.background + .8f*res).light,0.f);
+	if (res > mat.specular)
+		return Light(Color(1.f, 1.f, 1.f), 1.f);
+	else if (res < 0)
+		return world.background;
+	else
+		return world.background + Light(world.globalLight.c * mat.color*mat.diffuse, res);
 }
 
 /*
