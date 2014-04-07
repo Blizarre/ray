@@ -1,6 +1,8 @@
 ray
 ===
 
+***WARNING: Work in progress, is undergoing a massive deconstruction/reconstruction***
+
 I made this soft a while back and elcerdo decided to port it to github with slight modifications. 
 He said that thanks to his changes it no longer works, i must take some times to bring it back in a usable state ;)
 
