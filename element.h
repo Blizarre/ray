@@ -11,9 +11,11 @@ class World;
 
 class Element {
 public:
-    virtual float isIntersection(const Rayon & rayon) =0;
-    virtual Light luminosite(const Rayon &, const World &) const =0;
-    virtual ~Element() {};
+    virtual float isIntersection(const Rayon & rayon) = 0;
+    virtual Light luminosite(const Rayon &, const World &) const = 0;
+
+    virtual ~Element() {
+    };
 };
 
 

@@ -13,7 +13,7 @@ template <class T> Vecteur3<T>::Vecteur3(T* v) {
     this->val[2] = v[2];
 }
 
-template <class T> T&  Vecteur3<T>::operator[] (unsigned int i) {
+template <class T> T& Vecteur3<T>::operator[](unsigned int i) {
     return this->val[i];
 }
 
@@ -23,7 +23,7 @@ template <class T> T Vecteur3<T>::X() const {
 
 template <class T> T Vecteur3<T>::Y() const {
     return this->val[1];
-} 
+}
 
 template <class T> T Vecteur3<T>::Z() const {
     return this->val[2];
@@ -44,7 +44,7 @@ template <class T> void Vecteur3<T>::normer() {
 template <class T> void Vecteur3<T>::normer(T val) {
     T norme = this->norme();
     T facteur = norme / val;
-  
+
     this->val[0] *= facteur;
     this->val[1] *= facteur;
     this->val[2] *= facteur;
@@ -62,9 +62,11 @@ template <class T> Vecteur3<T> Vecteur3<T>::operator+(const Vecteur3<T> &op) con
     return Vecteur3<T>(this->val[0] + op.val[0], this->val[1] + op.val[1], this->val[2] + op.val[2]);
 }
 
-template <class T> 
+template <class T>
 Vecteur3<T> &Vecteur3<T>::operator+=(const Vecteur3<T> &v) {
-    for (int i=0; i<3; i++) { this->val[i] += v.val[i]; }
+    for (int i = 0; i < 3; i++) {
+        this->val[i] += v.val[i];
+    }
     return *this;
 }
 
@@ -73,5 +75,5 @@ template <class T> Vecteur3<T> Vecteur3<T>::operator-(const Vecteur3<T> &op) con
 }
 
 template <class T> std::ostream &operator<<(std::ostream &s, const Vecteur3<T> &t) {
-    return s << t.X() << " " << t.Y() <<" " << t.Z();
+    return s << t.X() << " " << t.Y() << " " << t.Z();
 }

@@ -4,7 +4,6 @@
 #ifndef __MY_VECTOR__0ff0 
 #define __MY_VECTOR__0ff0
 
-
 template<class T>
 class Vecteur3 {
 public:

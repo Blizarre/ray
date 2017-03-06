@@ -2,12 +2,15 @@
 
 class Pixel {
 public:
-	Pixel() { A = 0xff; }
-	Uint8 B;
-	Uint8 G;
-	Uint8 R;
 
-	Uint8 A;
+    Pixel() {
+        A = 0xff;
+    }
+    Uint8 B;
+    Uint8 G;
+    Uint8 R;
+
+    Uint8 A;
 };
 
 void freeRenderer(Uint32 *myPixels);

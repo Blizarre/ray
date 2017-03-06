@@ -7,8 +7,8 @@
 
 class LightSource {
 public:
-	Direction direction;
-	Color c;
+    Direction direction;
+    Color c;
 };
 
 #endif

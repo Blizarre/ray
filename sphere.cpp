@@ -3,8 +3,7 @@
 #include <cstdlib>
 #include <algorithm>
 
-
-Sphere::Sphere(const Position &pos, float diam, Material mat) : position(pos), light(-5,5,-5), radius2((diam/2)*(diam/2)), mat(mat) {
+Sphere::Sphere(const Position &pos, float diam, Material mat) : position(pos), light(-5, 5, -5), radius2((diam / 2)*(diam / 2)), mat(mat) {
     light.normer();
 }
 
@@ -18,14 +17,14 @@ float Sphere::isIntersection(const Rayon & rayon) {
     if (t_ca < 0) return false;
 
     float d2 = L * L - t_ca * t_ca;
-    
-	if (d2 > this->radius2)
-		return -1.0f;
+
+    if (d2 > this->radius2)
+        return -1.0f;
 
     float t_hc = sqrtf(this->radius2 - d2);
-	this->lastRay.distance = std::min(t_ca - t_hc, t_ca + t_hc);
-	this->lastRay.intersection = rayon.origine + rayon.direction * lastRay.distance;
-	return this->lastRay.distance;
+    this->lastRay.distance = std::min(t_ca - t_hc, t_ca + t_hc);
+    this->lastRay.intersection = rayon.origine + rayon.direction * lastRay.distance;
+    return this->lastRay.distance;
 }
 
 Light Sphere::luminosite(const Rayon &rayon, const World &world) const {
@@ -33,12 +32,12 @@ Light Sphere::luminosite(const Rayon &rayon, const World &world) const {
     N.normer();
 
     float res = world.globalLight.direction * N;
-	if (res > mat.specular)
-		return Light(Color(1.f, 1.f, 1.f), 1.f);
-	else if (res < 0)
-		return world.background;
-	else
-		return world.background + Light(world.globalLight.c * mat.color*mat.diffuse, res);
+    if (res > mat.specular)
+        return Light(Color(1.f, 1.f, 1.f), 1.f);
+    else if (res < 0)
+        return world.background;
+    else
+        return world.background + Light(world.globalLight.c * mat.color * mat.diffuse, res);
 }
 
 /*
@@ -126,4 +125,4 @@ class Sphere: public Element {
 };
 
 
-*/
+ */
