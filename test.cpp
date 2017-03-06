@@ -17,7 +17,7 @@ Direction definirDirection(Direction &direction, float x, float y) {
     direction[0] = tanx * (2.f * x - LARGEUR) / (LARGEUR);
     direction[1] = tany * (2.f * y - HAUTEUR) / (HAUTEUR);
     direction[2] = 1.f;
-    direction.normer();
+    direction.makeUnitVector();
     return direction;
 }
 

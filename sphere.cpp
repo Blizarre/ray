@@ -4,7 +4,7 @@
 #include <algorithm>
 
 Sphere::Sphere(const Position &pos, float diam, Material mat) : position(pos), light(-5, 5, -5), radius2((diam / 2)*(diam / 2)), mat(mat) {
-    light.normer();
+    light.makeUnitVector();
 }
 
 void Sphere::deplacer(const Direction &dx) {
@@ -29,7 +29,7 @@ float Sphere::isIntersection(const Rayon & rayon) {
 
 Light Sphere::luminosite(const Rayon &rayon, const World &world) const {
     Position N = lastRay.intersection - this->position;
-    N.normer();
+    N.makeUnitVector();
 
     float res = world.globalLight.direction * N;
     if (res > mat.specular)

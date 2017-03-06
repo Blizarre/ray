@@ -29,25 +29,16 @@ template <class T> T Vecteur3<T>::Z() const {
     return this->val[2];
 }
 
-template <class T> T Vecteur3<T>::norme() const {
+template <class T> T Vecteur3<T>::getNorm() const {
     return sqrt(this->val[0] * this->val[0] + this->val[1] * this->val[1] + this->val[2] * this->val[2]);
 }
 
-template <class T> void Vecteur3<T>::normer() {
-    T norme = this->norme();
+template <class T> void Vecteur3<T>::makeUnitVector() {
+    T norme = this->getNorm();
 
     this->val[0] /= norme;
     this->val[1] /= norme;
     this->val[2] /= norme;
-}
-
-template <class T> void Vecteur3<T>::normer(T val) {
-    T norme = this->norme();
-    T facteur = norme / val;
-
-    this->val[0] *= facteur;
-    this->val[1] *= facteur;
-    this->val[2] *= facteur;
 }
 
 template <class T> T Vecteur3<T>::operator*(const Vecteur3<T> &op) const {

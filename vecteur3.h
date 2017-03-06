@@ -13,8 +13,8 @@ public:
     T X() const;
     T Y() const;
     T Z() const;
-    T norme() const;
-    void normer();
+    T getNorm() const;
+    void makeUnitVector();
     void normer(T);
     T& operator[](unsigned int);
 
