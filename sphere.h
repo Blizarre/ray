@@ -4,8 +4,8 @@
 #include "element.h"
 #include "world.h"
 #include "vecteur3.h"
-#include "Rayon.h"
-#include "Material.h"
+#include "rayon.h"
+#include "material.h"
 
 class Sphere: public Element {
 public:

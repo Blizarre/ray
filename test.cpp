@@ -2,7 +2,7 @@
 #include "element.h"
 #include "sphere.h"
 #include "plane.h"
-#include "Material.h"
+#include "material.h"
 #include <algorithm>
 static const int SCREEN_INIT_ERROR = 5;
 static const int RETURN_OK = 0;

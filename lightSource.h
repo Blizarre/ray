@@ -2,7 +2,7 @@
 
 #define _LIGHTSOURCE_0X003
 
-#include "Color.h"
+#include "color.h"
 #include "vecteur3.h"
 
 class LightSource {

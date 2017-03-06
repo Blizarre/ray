@@ -4,10 +4,10 @@
 
 #include "element.h"
 #include "rayon.h"
-#include "LightSource.h"
-#include "Rayon.h"
+#include "lightSource.h"
 
 #include <list>
+#include <limits>
 
 class Element;
 

@@ -2,7 +2,7 @@
 #define __PLANE_H__
 
 #include "element.h"
-#include "World.h"
+#include "world.h"
 class Plane: public Element {
 public:
     Plane();
