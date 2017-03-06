@@ -7,14 +7,14 @@
 
 class Material {
 public:
-	Material() : specular(0.f), diffuse(0.f), color(Color(1.f, 0.f, 0.f)), refractiveindex(0.f) { }
+	Material() : specular(0.f), diffuse(0.f), color(Color(1.f, 0.f, 0.f)), reflectiveIndex(0.f) { }
 	Material(float specular, float diffuse, Color color, float reflectiveIndex, float transparency) :
-		specular(specular), color(color), diffuse(diffuse), refractiveindex(refractiveindex), transparency(transparency) { }
+		specular(specular), diffuse(diffuse), color(color), reflectiveIndex(reflectiveIndex), transparency(transparency) { }
 
 	float specular;
 	float diffuse;
 	Color color;
-	float refractiveindex;
+	float reflectiveIndex;
 	float transparency;
 
 	static Material glass() { return Material(0.9f, 0.1f, Color(1.f, 1.f, 1.f), 1.5f, 0.3f); };
