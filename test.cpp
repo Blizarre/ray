@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
             }
 
         showImage(screen);
-        printf("temps: %1dms\n", SDL_GetTicks() - t1);
+        printf("temps: %1ums\n", SDL_GetTicks() - t1);
     }
 
     freeRenderer(screen);
