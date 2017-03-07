@@ -29,11 +29,6 @@ Pixel lightToPixel(Light l) {
     return p;
 }
 
-// Need to be extern "C" for SDL
-#ifdef __cplusplus
-
-extern "C"
-#endif
 int main(int argc, char *argv[]) {
     Uint32 *screen; //This pointer will reference the backbuffer 
     screen = InitVideo(LARGEUR, HAUTEUR);
