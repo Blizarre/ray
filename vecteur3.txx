@@ -1,3 +1,5 @@
+#pragma once
+
 template <class T> Vecteur3<T>::Vecteur3(T x, T y, T z) {
     this->val[0] = x;
     this->val[1] = y;

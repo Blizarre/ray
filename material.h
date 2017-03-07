@@ -1,7 +1,4 @@
-#ifndef _MATERIAL_0XDFEE
-
-#define _MATERIAL_0XDFEE
-
+#pragma once
 
 #include "light.h"
 
@@ -41,5 +38,3 @@ public:
         return Material(1.f, 0.5f, Color(0.3f, 0.3f, 0.3f), 0.f, 0.f);
     };
 };
-
-#endif

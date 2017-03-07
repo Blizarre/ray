@@ -1,5 +1,4 @@
-#ifndef __SPHERE_0ff1
-#define __SPHERE_0ff1
+#pragma once
 
 #include "element.h"
 #include "world.h"
@@ -23,6 +22,3 @@ private:
     float radius2; // ray * ray
     Material mat;
 };
-
-
-#endif

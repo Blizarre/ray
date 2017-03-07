@@ -1,5 +1,4 @@
-#ifndef __ELEMENT_0ff0
-#define __ELEMENT_0ff0
+#pragma once
 
 #include "light.h"
 #include "lightray.h"
@@ -17,6 +16,3 @@ public:
     virtual ~Element() {
     };
 };
-
-
-#endif

@@ -1,6 +1,4 @@
-#ifndef _WORLD_0X34
-
-#define _WORLD_0X34
+#pragma once
 
 #include "element.h"
 #include "lightray.h"
@@ -31,5 +29,3 @@ public:
     Elements elements;
     Light background;
 };
-
-#endif

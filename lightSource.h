@@ -1,6 +1,4 @@
-#ifndef _LIGHTSOURCE_0X003
-
-#define _LIGHTSOURCE_0X003
+#pragma once
 
 #include "color.h"
 #include "vecteur3.h"
@@ -10,5 +8,3 @@ public:
     Direction direction;
     Color c;
 };
-
-#endif

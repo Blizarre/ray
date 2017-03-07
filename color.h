@@ -1,6 +1,4 @@
-#ifndef _COLOR_0X4354
-
-#define _COLOR_0X4354
+#pragma once
 
 class Color {
 public:
@@ -26,5 +24,3 @@ public:
     Color(float R, float G, float B) : Red(R), Green(G), Blue(B) {
     }
 };
-
-#endif

@@ -1,8 +1,6 @@
+#pragma once
+
 #include "color.h"
-
-#ifndef _LIGHT_OX343
-
-#define _LIGHT_OX343
 
 class Light {
 public:
@@ -30,5 +28,3 @@ public:
     float light;
     Color col;
 };
-
-#endif

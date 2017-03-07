@@ -1,4 +1,6 @@
-#include "SDL.h" 
+#pragma once
+
+#include "SDL.h"
 
 class Pixel {
 public:

@@ -1,5 +1,4 @@
-#ifndef __PLANE_H__
-#define __PLANE_H__
+#pragma once
 
 #include "element.h"
 #include "world.h"
@@ -14,6 +13,3 @@ public:
 protected:
     LightRay lastIntersection;
 };
-
-#endif
-

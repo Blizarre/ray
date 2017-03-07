@@ -1,6 +1,4 @@
-#ifndef _RAYON_0X34
-
-#define _RAYON_0X34
+#pragma once
 
 #include "vecteur3.h"
 
@@ -16,5 +14,3 @@ public:
     float distance;
     int depth;
 };
-
-#endif

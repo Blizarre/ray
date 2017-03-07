@@ -1,8 +1,7 @@
+#pragma once
+
 #include<cmath>
 #include<ostream>
-
-#ifndef __MY_VECTOR__0ff0 
-#define __MY_VECTOR__0ff0
 
 template<class T>
 class Vecteur3 {
@@ -35,5 +34,3 @@ std::ostream& operator<<(std::ostream& s, const Vecteur3<T> &t);
 
 typedef Vecteur3<float> Direction;
 typedef Vecteur3<float> Position;
-
-#endif
