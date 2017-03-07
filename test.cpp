@@ -50,9 +50,9 @@ int main(int argc, char *argv[]) {
             if (event.type == SDL_MOUSEMOTION) {
                 monde.globalLight.direction[0] += 0.01f * (event.motion.xrel);
                 monde.globalLight.direction[1] += 0.01f * (event.motion.yrel);
-                //camera_ray.origine[0] += 0.01f
+                //camera_ray.origin[0] += 0.01f
                 //	* (event.motion.xrel);
-                //camera_ray.origine[1] += 0.01f * (event.motion.yrel);
+                //camera_ray.origin[1] += 0.01f * (event.motion.yrel);
             }
             if (event.type == SDL_KEYDOWN) {
                 exit(RETURN_OK);
@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
         }
 
         Uint32 t1 = SDL_GetTicks();
-        mov->deplacer(Direction(0.f, 0.f, 0.1f * (1 - 2 * (((int) (t1 / 2000.0f)) % 2))));
+        mov->translate(Direction(0.f, 0.f, 0.1f * (1 - 2 * (((int) (t1 / 2000.0f)) % 2))));
 
         //#pragma omp parallel
         for (int x = 0; x < LARGEUR; x++) for (int y = 0; y < HAUTEUR; y++) {

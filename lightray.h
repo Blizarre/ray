@@ -4,11 +4,11 @@
 
 class LightRay {
 public:
-    LightRay(const Position& origine, const Direction &direction);
+    LightRay(const Position& origin, const Direction &direction);
     LightRay();
     void update(const LightRay &ray);
 
-    Position origine;
+    Position origin;
     Direction direction;
     Position intersection;
     float distance;

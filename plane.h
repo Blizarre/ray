@@ -8,7 +8,7 @@ public:
     Plane();
 
     virtual float isIntersection(const LightRay &ray);
-    virtual Light luminosite(const LightRay &ray, const World &world) const;
+    virtual Light luminosity(const LightRay &ray, const World &world) const;
 
 protected:
     LightRay lastIntersection;

@@ -11,9 +11,9 @@ public:
     Sphere(const Position &pos, float diam, Material mat);
 
     virtual float isIntersection(const LightRay & ray);
-    virtual Light luminosite(const LightRay & ray, const World & world) const;
+    virtual Light luminosity(const LightRay & ray, const World & world) const;
 
-    void deplacer(const Direction &d);
+    void translate(const Direction &d);
 
 private:
     mutable LightRay lastRay;

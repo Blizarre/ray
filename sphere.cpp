@@ -7,12 +7,12 @@ Sphere::Sphere(const Position &pos, float diam, Material mat) : position(pos), l
     light.makeUnitVector();
 }
 
-void Sphere::deplacer(const Direction &dx) {
+void Sphere::translate(const Direction &dx) {
     this->position += dx;
 }
 
 float Sphere::isIntersection(const LightRay & ray) {
-    Position L = this->position - ray.origine;
+    Position L = this->position - ray.origin;
     float t_ca = L * ray.direction;
     if (t_ca < 0) return false;
 
@@ -23,11 +23,11 @@ float Sphere::isIntersection(const LightRay & ray) {
 
     float t_hc = sqrtf(this->radius2 - d2);
     this->lastRay.distance = std::min(t_ca - t_hc, t_ca + t_hc);
-    this->lastRay.intersection = ray.origine + ray.direction * lastRay.distance;
+    this->lastRay.intersection = ray.origin + ray.direction * lastRay.distance;
     return this->lastRay.distance;
 }
 
-Light Sphere::luminosite(const LightRay &ray, const World &world) const {
+Light Sphere::luminosity(const LightRay &ray, const World &world) const {
     Position N = lastRay.intersection - this->position;
     N.makeUnitVector();
 

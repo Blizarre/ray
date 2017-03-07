@@ -15,7 +15,7 @@ Light World::rayTracing(LightRay &ray, const Element *from) const {
     }
 
     if (elementMin)
-        return elementMin->luminosite(ray, *this);
+        return elementMin->luminosity(ray, *this);
     else return background;
 }
 
