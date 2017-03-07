@@ -11,9 +11,9 @@ void Sphere::deplacer(const Direction &dx) {
     this->position += dx;
 }
 
-float Sphere::isIntersection(const Rayon & rayon) {
-    Position L = this->position - rayon.origine;
-    float t_ca = L * rayon.direction;
+float Sphere::isIntersection(const LightRay & ray) {
+    Position L = this->position - ray.origine;
+    float t_ca = L * ray.direction;
     if (t_ca < 0) return false;
 
     float d2 = L * L - t_ca * t_ca;
@@ -23,11 +23,11 @@ float Sphere::isIntersection(const Rayon & rayon) {
 
     float t_hc = sqrtf(this->radius2 - d2);
     this->lastRay.distance = std::min(t_ca - t_hc, t_ca + t_hc);
-    this->lastRay.intersection = rayon.origine + rayon.direction * lastRay.distance;
+    this->lastRay.intersection = ray.origine + ray.direction * lastRay.distance;
     return this->lastRay.distance;
 }
 
-Light Sphere::luminosite(const Rayon &rayon, const World &world) const {
+Light Sphere::luminosite(const LightRay &ray, const World &world) const {
     Position N = lastRay.intersection - this->position;
     N.makeUnitVector();
 
@@ -54,7 +54,7 @@ class Sphere: public Element {
         Vecteur3f vecteurIncident;
         float diametre;
         float distance;
-        float r2; // Rayon * Rayon
+        float r2; // ray * ray
             
     public:
         Sphere(Vecteur3f pos, float diam):position(pos), diametre(diam) {
@@ -81,7 +81,7 @@ class Sphere: public Element {
 
             // directionRayon doit être normé.. A=1 dans ce cas donc il est ignoré....
             T B = 2*(directionRayon * (origineRayon - this->position));
-            T C = (origineRayon - this->position ).norme() - (this->rayon * this->rayon);
+            T C = (origineRayon - this->position ).norme() - (this->ray * this->ray);
             T Q, x1, x2;
 
             T delta = (B * B - 4 * C);

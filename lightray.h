@@ -4,11 +4,11 @@
 
 #include "vecteur3.h"
 
-class Rayon {
+class LightRay {
 public:
-    Rayon(const Position& origine, const Direction &direction);
-    Rayon();
-    void update(const Rayon &rayon);
+    LightRay(const Position& origine, const Direction &direction);
+    LightRay();
+    void update(const LightRay &ray);
 
     Position origine;
     Direction direction;

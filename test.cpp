@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
     screen = InitVideo(LARGEUR, HAUTEUR);
     if (screen == NULL) exit(SCREEN_INIT_ERROR);
 
-    Rayon camera_ray(Position(0, 0, -3), Direction(0, 0, 1));
+    LightRay camera_ray(Position(0, 0, -3), Direction(0, 0, 1));
     World monde;
 
     Sphere* mov = new Sphere(Position(3, 3, 10), 5, Material::glass());

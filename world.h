@@ -3,7 +3,7 @@
 #define _WORLD_0X34
 
 #include "element.h"
-#include "rayon.h"
+#include "lightray.h"
 #include "lightSource.h"
 
 #include <list>
@@ -25,7 +25,7 @@ public:
         background = 0.5f;
     }
 
-    Light rayTracing(Rayon &rayon, const Element *from) const;
+    Light rayTracing(LightRay &ray, const Element *from) const;
     ~World();
     LightSource globalLight;
     Elements elements;

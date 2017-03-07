@@ -8,11 +8,11 @@ class Plane : public Element {
 public:
     Plane();
 
-    virtual float isIntersection(const Rayon &rayon);
-    virtual Light luminosite(const Rayon &rayon, const World &world) const;
+    virtual float isIntersection(const LightRay &ray);
+    virtual Light luminosite(const LightRay &ray, const World &world) const;
 
 protected:
-    Rayon lastIntersection;
+    LightRay lastIntersection;
 };
 
 #endif
