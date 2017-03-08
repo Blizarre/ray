@@ -11,12 +11,31 @@ static const int RETURN_OK = 0;
 static const int SCREEN_WIDTH = 512;
 static const int SCREEN_HEIGH = 384;
 
-static const float tanx = tanf(static_cast<float> (M_PI) / 4.0f);
-static const float tany = tanf(static_cast<float> (SCREEN_HEIGH) / static_cast<float> (SCREEN_WIDTH) * static_cast<float> (M_PI) / 4.0f);
+// viewAngle is 90 deg. or PI/2
+static const float halfViewAngleX = static_cast<float> (M_PI/ 2.0f);
 
-Direction definirDirection(Direction &direction, float x, float y) {
-    direction[0] = tanx * (2.f * x - SCREEN_WIDTH) / (SCREEN_WIDTH);
-    direction[1] = tany * (2.f * y - SCREEN_HEIGH) / (SCREEN_HEIGH);
+static const float halfViewAngleY =
+    halfViewAngleX * \
+    (static_cast<float> (SCREEN_HEIGH) / static_cast<float> (SCREEN_WIDTH));
+
+//         |angle a/
+//         |     /
+//         | 1  /
+// - - - - |---*
+//1/tan a  |  /
+//         | /  viewAngle / 2 (or halfViewAngle)
+// camera :-------
+//           \
+//            \
+//             \
+// a = M_PI/2 - viewAngle/2
+// tan a = 1 / x
+Direction screenPixelDirection(Direction &direction, float x, float y) {
+    float alphaX = M_PI / 2.0f - halfViewAngleX * (x - SCREEN_WIDTH / 2.0f) / SCREEN_WIDTH;
+    float alphaY = M_PI / 2.0f - halfViewAngleY * (y - SCREEN_HEIGH / 2.0f) / SCREEN_HEIGH;
+
+    direction[0] = 1.0f / tanf(alphaX);
+    direction[1] = 1.0f / tanf(alphaY);
     direction[2] = 1.f;
     direction.makeUnitVector();
     return direction;
@@ -64,7 +83,7 @@ int main(int argc, char *argv[]) {
         mov->translate(Direction(0.f, 0.f, 0.1f * (1 - 2 * (((int) (t1 / 2000.0f)) % 2))));
 
         for (int x = 0; x < SCREEN_WIDTH; x++) for (int y = 0; y < SCREEN_HEIGH; y++) {
-                definirDirection(camera_ray.direction, static_cast<float> (x), static_cast<float> (y));
+                screenPixelDirection(camera_ray.direction, static_cast<float> (x), static_cast<float> (y));
                 Light value = world.rayTracing(camera_ray, NULL);
                 definirPixel(screen, x, y, lightToPixel(value));
             }
