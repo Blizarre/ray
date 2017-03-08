@@ -4,8 +4,7 @@
 #include "lightray.h"
 #include "world.h"
 
-// Why should I need to declare World, since the header world?h is alreay included ?
-// Maybe because there's a reference to World in the the definition of Element and vice versa
+// to resolve circular dependency ELement <-> World 
 class World;
 
 class Element {

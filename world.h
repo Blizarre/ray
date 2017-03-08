@@ -7,6 +7,7 @@
 #include <list>
 #include <limits>
 
+// to resolve circular dependency ELement <-> World 
 class Element;
 
 typedef std::list<Element*> Elements;
