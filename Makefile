@@ -7,11 +7,18 @@ BIN=main
 SOURCES = $(wildcard *.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)
 
+# http://scottmcpeak.com/autodepend/autodepend.html
+-include $(OBJECTS:.o=.d)
+
+
+%.o: %.cpp
+	$(CXX) -c $(CXXFLAGS) $*.cpp -o $*.o
+	$(CXX) -MM $(CXXFLAGS) $*.cpp > $*.d
 
 all: $(BIN)
 
 clean:
-	$(RM) $(BIN) *.o
+	$(RM) $(BIN) *.o *.d
 
 $(BIN): $(OBJECTS)
 	$(CXX) $(OBJECTS) $(LDFLAGS) -o $(BIN)
