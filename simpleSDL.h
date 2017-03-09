@@ -20,5 +20,5 @@ void showImage(Uint32 *myPixels);
 
 Uint32* InitVideo(int, int);
 
-void definirPixel(Uint32 *surface, int x, int y, Pixel pixel);
+void setPixelValue(Uint32 *surface, int x, int y, Pixel pixel);
 

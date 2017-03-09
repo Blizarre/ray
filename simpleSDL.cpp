@@ -52,7 +52,7 @@ Uint32* InitVideo(int l, int h) {
     return data;
 }
 
-void definirPixel(Uint32 *surface, int x, int y, Pixel p) {
+void setPixelValue(Uint32 *surface, int x, int y, Pixel p) {
     Uint32 *uintVal = surface + y * largeur + x;
     memcpy(uintVal, &p, sizeof (Uint32));
 }

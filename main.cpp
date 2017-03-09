@@ -87,8 +87,8 @@ int main(int argc, char *argv[]) {
         for (int x = 0; x < SCREEN_WIDTH; x++) for (int y = 0; y < SCREEN_HEIGH; y++) {
                 screenPixelDirection(camera_ray.direction, static_cast<float> (x), static_cast<float> (y));
                 Light value = world.rayTracing(camera_ray, NULL);
-                definirPixel(screen, x, y, lightToPixel(value));
-            }
+                setPixelValue(screen, x, y, lightToPixel(value));
+        }
 
         showImage(screen);
         printf("time: %1ums\n", SDL_GetTicks() - t1);
