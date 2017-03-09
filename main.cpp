@@ -12,11 +12,12 @@ static const int SCREEN_WIDTH = 512;
 static const int SCREEN_HEIGH = 384;
 
 // viewAngle is 90 deg. or PI/2
-static const float halfViewAngleX = static_cast<float> (M_PI/ 2.0f);
+static const float halfViewAngleX = static_cast<float> (M_PI/ 2.0f) / 2.0f;
 
 static const float halfViewAngleY =
     halfViewAngleX * \
     (static_cast<float> (SCREEN_HEIGH) / static_cast<float> (SCREEN_WIDTH));
+
 
 //         |angle a/
 //         |     /
@@ -29,16 +30,17 @@ static const float halfViewAngleY =
 //            \
 //             \
 // a = M_PI/2 - viewAngle/2
-// tan a = 1 / x
-Direction screenPixelDirection(Direction &direction, float x, float y) {
-    float alphaX = M_PI / 2.0f - halfViewAngleX * (x - SCREEN_WIDTH / 2.0f) / SCREEN_WIDTH;
-    float alphaY = M_PI / 2.0f - halfViewAngleY * (y - SCREEN_HEIGH / 2.0f) / SCREEN_HEIGH;
+// tan a = 1 / range x <=> range x = 1 / tan a
+static const float rangeX = 1 / tanf(M_PI / 2.0f - halfViewAngleX);
+static const float rangeY = 1 / tanf(M_PI / 2.0f - halfViewAngleY);
 
-    direction[0] = 1.0f / tanf(alphaX);
-    direction[1] = 1.0f / tanf(alphaY);
+void screenPixelDirection(Direction &direction, float x, float y) {
+
+    direction[0] = rangeX * (x - SCREEN_WIDTH / 2.0f) / SCREEN_WIDTH;
+    direction[1] = rangeY * (y - SCREEN_HEIGH / 2.0f) / SCREEN_HEIGH;
+
     direction[2] = 1.f;
     direction.makeUnitVector();
-    return direction;
 }
 
 Pixel lightToPixel(Light l) {
