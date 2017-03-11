@@ -10,17 +10,25 @@ void Sphere::translate(const Direction &dx) {
 }
 
 float Sphere::isIntersection(const LightRay & ray) {
-    Position L = this->position - ray.origin;
-    float t_ca = L * ray.direction;
-    if (t_ca < 0) return false;
+    Vector3f sphereToRayOrigin = this->position - ray.origin;
 
-    float d2 = L * L - t_ca * t_ca;
+    float projection = sphereToRayOrigin * ray.direction;
 
+    // the dot product will be <0 if the sphere center is behind the ray
+    if (projection < 0)
+        return -1.0f;
+
+    // compute minimal distance between ray and sphere center
+    float d2 = sphereToRayOrigin * sphereToRayOrigin - projection * projection;
+
+    // check if this distance it larger than the radius (distance squared and radius squared)
     if (d2 > this->radius2)
         return -1.0f;
 
-    float t_hc = sqrtf(this->radius2 - d2);
-    this->lastRay.distance = std::min(t_ca - t_hc, t_ca + t_hc);
+    // We know that the ray intersect the sphere, now we try get the intersection location
+
+    float intersectionOffset = sqrtf(this->radius2 - d2);
+    this->lastRay.distance = std::min(projection - intersectionOffset, projection + intersectionOffset);
     this->lastRay.intersection = ray.origin + ray.direction * lastRay.distance;
     return this->lastRay.distance;
 }

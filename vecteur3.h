@@ -32,5 +32,6 @@ std::ostream& operator<<(std::ostream& s, const Vector3<T> &t);
 
 #include "vector3.txx"
 
+typedef Vector3<float> Vector3f;
 typedef Vector3<float> Direction;
 typedef Vector3<float> Position;
