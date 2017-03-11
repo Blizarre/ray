@@ -4,11 +4,11 @@
 #include<ostream>
 
 template<class T>
-class Vecteur3 {
+class Vector3 {
 public:
-    Vecteur3(T x, T y, T z);
-    Vecteur3(T* v);
-    Vecteur3();
+    Vector3(T x, T y, T z);
+    Vector3(T* v);
+    Vector3();
     T X() const;
     T Y() const;
     T Z() const;
@@ -17,20 +17,20 @@ public:
     void normer(T);
     T& operator[](unsigned int);
 
-    T operator*(const Vecteur3<T> &) const;
-    Vecteur3<T> operator*(T op) const;
-    Vecteur3<T> operator+(const Vecteur3<T> &) const;
-    Vecteur3<T> &operator+=(const Vecteur3<T> &);
-    Vecteur3<T> operator-(const Vecteur3<T> &) const;
+    T operator*(const Vector3<T> &) const;
+    Vector3<T> operator*(T op) const;
+    Vector3<T> operator+(const Vector3<T> &) const;
+    Vector3<T> &operator+=(const Vector3<T> &);
+    Vector3<T> operator-(const Vector3<T> &) const;
 
 private:
     T val[3];
 };
 
 template <class T>
-std::ostream& operator<<(std::ostream& s, const Vecteur3<T> &t);
+std::ostream& operator<<(std::ostream& s, const Vector3<T> &t);
 
-#include "vecteur3.txx"
+#include "vector3.txx"
 
-typedef Vecteur3<float> Direction;
-typedef Vecteur3<float> Position;
+typedef Vector3<float> Direction;
+typedef Vector3<float> Position;
