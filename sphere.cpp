@@ -3,9 +3,7 @@
 #include <cstdlib>
 #include <algorithm>
 
-Sphere::Sphere(const Position &pos, float diam, Material mat) : position(pos), light(-5, 5, -5), radius2((diam / 2)*(diam / 2)), mat(mat) {
-    light.makeUnitVector();
-}
+Sphere::Sphere(const Position &pos, float diam, Material mat) : position(pos), radius2((diam / 2)*(diam / 2)), mat(mat) { }
 
 void Sphere::translate(const Direction &dx) {
     this->position += dx;

@@ -18,7 +18,6 @@ public:
 private:
     mutable LightRay lastRay;
     Position position;
-    Position light;
     float radius2; // ray * ray
     Material mat;
 };
