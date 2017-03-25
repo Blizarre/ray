@@ -54,7 +54,7 @@ Pixel lightToPixel(Light l) {
 int main(int argc, char *argv[]) {
     Uint32 *screen; //This pointer will reference the backbuffer 
     screen = InitVideo(SCREEN_WIDTH, SCREEN_HEIGH);
-    if (screen == NULL) exit(SCREEN_INIT_ERROR);
+    if (screen == nullptr) exit(SCREEN_INIT_ERROR);
 
     LightRay camera_ray(Position(0, 0, -3), Direction(0, 0, 1));
     World world;
@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
 
         for (int x = 0; x < SCREEN_WIDTH; x++) for (int y = 0; y < SCREEN_HEIGH; y++) {
                 screenPixelDirection(camera_ray.direction, static_cast<float> (x), static_cast<float> (y));
-                Light value = world.rayTracing(camera_ray, NULL);
+                Light value = world.rayTracing(camera_ray, nullptr);
                 setPixelValue(screen, x, y, lightToPixel(value));
         }
 

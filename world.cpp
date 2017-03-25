@@ -2,7 +2,7 @@
 
 Light World::rayTracing(LightRay &ray, const Element *from) const {
 
-    const Element *elementMin = NULL;
+    const Element *elementMin = nullptr;
     float distanceMin = std::numeric_limits<float>::max();
     float distance = 0;
 

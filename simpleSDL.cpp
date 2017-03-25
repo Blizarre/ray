@@ -19,8 +19,8 @@ void freeRenderer(Uint32 *myPixels) {
 }
 
 void showImage(Uint32 *myPixels) {
-    SDL_UpdateTexture(texture, NULL, myPixels, largeur * sizeof (Uint32));
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_UpdateTexture(texture, nullptr, myPixels, largeur * sizeof (Uint32));
+    SDL_RenderCopy(renderer, texture, nullptr, nullptr);
     SDL_RenderPresent(renderer);
 }
 
@@ -32,7 +32,7 @@ Uint32* InitVideo(int l, int h) {
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         cerr << "Unable to initialize SDL: " << SDL_GetError() << endl;
-        return NULL;
+        return nullptr;
     }
 
     atexit(SDL_Quit); // Clean it up nicely :)
